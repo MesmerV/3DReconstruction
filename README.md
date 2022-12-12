@@ -17,6 +17,12 @@ Dans le répertoire du projet, il suffit d'exécuter:
 
 Notre script va ensuite dérouler seul toute la chaîne de photogrammétrie. 
 
+## Masquage automatique
+
+
+Avec l'option ``` --with_masks ``` on calcule alors des masques qui vont permettre de filtrer les points n'appartenant pas au sujet. Cela est fait à l'aide d'un modèle développé par [Xuebin Qin](https://xuebinqin.github.io/), [Hang Dai](https://scholar.google.co.uk/citations?user=6yvjpQQAAAAJ&hl=en), [Xiaobin Hu](https://scholar.google.de/citations?user=3lMuodUAAAAJ&hl=en), [Deng-Ping Fan*](https://dengpingfan.github.io/), [Ling Shao](https://scholar.google.com/citations?user=z84rLjoAAAAJ&hl=en), [Luc Van Gool](https://scholar.google.com/citations?user=TwMib_QAAAAJ&hl=en) pour le papier de recherche [Highly Accurate Dichotomous Image Segmentation （ECCV 2022）](https://arxiv.org/pdf/2203.03041.pdf)  
+
+![ship-demo](figures/ship-demo.gif)
 
 # Installation
 
@@ -43,16 +49,15 @@ Sous réserve de l'installation de MicMac
 
 * Intallation de MicMac : https://micmac.ensg.eu/index.php/Install 
 
-Il faudra également avoir un environnement python adéquat (pas de yml fourni)
+Il faudra également avoir un environnement pytorch pour l'exécution du masquage automatique (pas de yml fourni)
 
+# Fonctionnement
 
 ## Préparation de l'environnement de travail
 
-On commence par copier les images cibles dans un dossier isolé appelé "workspace"
+* On commence par copier les images cibles dans un dossier isolé appelé "workspace" dans lequel tous les calculs seront faits.
 
-
-
-Avec l'option ``` --with_masks ``` on calcule alors des masques qui vont permettre de filtrer les points n'appartenant pas au sujet. Cela est fait à l'aide d'un modèle développé par [Xuebin Qin](https://xuebinqin.github.io/), [Hang Dai](https://scholar.google.co.uk/citations?user=6yvjpQQAAAAJ&hl=en), [Xiaobin Hu](https://scholar.google.de/citations?user=3lMuodUAAAAJ&hl=en), [Deng-Ping Fan*](https://dengpingfan.github.io/), [Ling Shao](https://scholar.google.com/citations?user=z84rLjoAAAAJ&hl=en), [Luc Van Gool](https://scholar.google.com/citations?user=TwMib_QAAAAJ&hl=en) pour le papier de recherche [Highly Accurate Dichotomous Image Segmentation （ECCV 2022）](https://arxiv.org/pdf/2203.03041.pdf)  
+ * Si l'option ``` --with_masks ``` est donnée en argument alors on génère à ce moment les masques pour chacune de nos images.
 
 
 # Déroulé de la pipeline MicMac
@@ -116,6 +121,13 @@ mm3d C3DC MicMac .*png Projet
 ```
 mm3d C3DC MicMac .*jpg Projet SH=MasqFiltered
 ```
+
+# Autres commandes utiles
+
+MicMac a alors généré un nuage de points dense à partir de vos images !
+Vous pouvez le visualiser avec [MeshLab](https://www.meshlab.net/) par exemple.
+
+Il y a souvent besoin de filtrer les points du décor avant de lancer la recontruction du maillage.
 
 ## TiPunch pour reconstruire un maillage
 
