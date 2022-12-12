@@ -2,3 +2,5 @@ Save
 MaskedResults
 MaskedImages
 workspace
+__pycache__
+.vscode

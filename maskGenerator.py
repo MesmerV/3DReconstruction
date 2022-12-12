@@ -38,7 +38,7 @@ def CreateMasks(dataset_path,result_path,thr=0,write_masked=False):
         if len(im.shape) < 3:
             im = im[:, :, np.newaxis]
         im_shp=im.shape[0:2]
-        im_tensor = torch.tensor(im, dtype=torch.float32).permute(2,0,1)
+        im_tensor = torch.tensor(np.copy(im), dtype=torch.float32).permute(2,0,1)
         im_tensor = F.upsample(torch.unsqueeze(im_tensor,0), input_size, mode="bilinear").type(torch.uint8)
         image = torch.divide(im_tensor,255.0)
         image = normalize(image,[0.5,0.5,0.5],[1.0,1.0,1.0])
@@ -77,5 +77,5 @@ if __name__ == "__main__":
 
     args = parser.parse_args()
 
-    CreateMasks(args.dataset_path,args.result_path,thr=0.5)
+    CreateMasks(args.dataset_path,args.result_path,thr=0)
     
