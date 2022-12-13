@@ -15,7 +15,7 @@ Notre contribution est ainsi de rendre accessible la photogrammétrie à ceux qu
 
 Dans le répertoire du projet, il suffit d'exécuter:
 ```
-    python pipelineLinux.py [--with_masks] ./path/to/images/folder
+    python pipelineLinux.py [--with_masks] ./ExampleSets/StatueHQ
 ```
 
 Notre script va ensuite dérouler seul toute la chaîne de photogrammétrie. 
