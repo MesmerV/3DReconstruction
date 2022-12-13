@@ -56,11 +56,12 @@ def MicMacPipeline(args,img):
     im_shp=img.shape[0:2]
     img_def = min(im_shp)
 
-    first_scale  = int(img_def/6)
-    second_scale  = int(img_def/1.9)
+    # Define the scale of the image that will be used in Tapioca
+    first_scale  = int(400 + img_def/9)
+    second_scale  = int(1000 + img_def/2.9)    
     
     ################################################################################################   
-    ################################################ MICMAC PIPELINE ###############################
+    ################################### MICMAC PIPELINE ############################################
     ################################################################################################
     
     # Run Tapioca to find tie points
@@ -72,12 +73,12 @@ def MicMacPipeline(args,img):
 
     #Schnaps that gets the points
     printTitle("Run Schnaps - checks tie points quality")
-    ExecuteProcess("mm3d",["Schnaps",matcher,"MoveBadImgs=true","NbWin=100"])
+    ExecuteProcess("mm3d",["Schnaps",matcher,"MoveBadImgs=true","NbWin=600"])
     
 
     #Tapas finds the camera positions
     printTitle("Run Tapas - Optimize camera pos")
-    if ExecuteProcess("mm3d",["Tapas","RadialExtended",matcher,"Out=Projet"]):
+    if ExecuteProcess("mm3d",["Tapas","Fraser",matcher,"Out=Projet"]):
         return
 
     # homolFilterPoints
@@ -96,32 +97,29 @@ def MicMacPipeline(args,img):
     #Save mesh !
     return 
 
-
-if __name__=="__main__":
-
-    # Parse arguments and prints usage if needed
-    
-    parser = argparse.ArgumentParser(
-        description='Photogrammetry Pipeline developped as an INF557 project')
-    parser.add_argument('dataset_path', metavar='dataset_path', type=str,
-                    help='The directory of your image dataset: see README.md to learn how to take good images')
-    parser.add_argument('--with_masks', action='store_true')
-    args = parser.parse_args()
-
+def main(args):
     #TODO check if steps are already done or not -> can restart not from the begining ! 
 
+    #Print title message
+    printTitle("3D Reconstruction - a fully automated MicMac pipeline")
+
+    # Look for images in dataset folder
+    im_list = GetImagesList(args.dataset_path)
+
+    if len(im_list) == 0:
+        logging.error("ERROR - No images found in "+ args.dataset_path + ' !!!' )
+        return
+
+    args.imgType = im_list[0].split('.')[-1]
+    logging.info("\n Found ",len(im_list), " images of type ",args.imgType,"\n\n" )
+    first_im = io.imread(im_list[0])
+    
     # Create workspace for MicMac with copies of images
     printTitle( "Cleaning workspace ...")
     ExecuteProcess("rm -r workspace",shell=True)
     ExecuteProcess("mkdir workspace",shell=True)
 
-    # Look for images in dataset folder
-    im_list = GetImagesList(args.dataset_path)
-    args.imgType = im_list[0].split('.')[-1]
-    print("\n Found ",len(im_list), " images of type ",args.imgType,"\n\n" )
-
-    first_im = io.imread(im_list[0])
-    
+    #Copying images
     printTitle("Copying images in "+args.dataset_path+" into wrking dir:")
     ExecuteProcess("cp",[args.dataset_path +"/*."+args.imgType,"workspace"],shell=True)
         
@@ -135,4 +133,24 @@ if __name__=="__main__":
     
     #launch pieline with args
     MicMacPipeline(args, first_im)
+    
+    return
+
+
+
+if __name__=="__main__":
+
+    # Parse arguments and prints usage if needed
+    
+    parser = argparse.ArgumentParser(
+        description='Photogrammetry Pipeline developped as an INF557 project')
+    parser.add_argument('dataset_path', metavar='dataset_path', type=str,
+                    help='The directory of your image dataset: see README.md to learn how to take good images')
+    parser.add_argument('--with_masks', action='store_true')
+    args = parser.parse_args()
+
+    #Launch main function
+    main(args)
+
+    
     

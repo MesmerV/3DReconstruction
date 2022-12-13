@@ -162,7 +162,12 @@ mm3d Tequila .*JPG Projet your_mesh.ply
 ## notes 
 
 statue4 -> 700 2400 ok
+
 vanneau 700 2500 pas ok
-Vanneau 
+
+Vanneau 844 2480 s 600 erreur tapas
+
+StatueHQ 844 2480 s 600 ok
+
 
 
