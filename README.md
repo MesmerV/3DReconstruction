@@ -29,6 +29,10 @@ Avec l'option ``` --with_masks ``` on calcule alors des masques qui vont permett
 
 # Installation
 
+```
+    git clone https://github.com/MesmerV/3DReconstruction.git
+```
+
 ## Linux
 
 MicMac fonctionne mieux sous Linux, c'est donc l'OS à préférer pour utiliser ce script.
