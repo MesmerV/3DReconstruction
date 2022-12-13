@@ -6,6 +6,9 @@ Nous ajoutons à cela des outils de traitement d'image permettant notamment de d
 
 Notre contribution est ainsi de rendre accessible la photogrammétrie à ceux qui ne sont pas formés à cet art et qui sont désireux d'un outil utilisable en une commande.
 
+
+![demo](figures/Photo2mesh.gif)
+
 **Néanmoins, notre outil n'est pas magique et un ensemble d'images non adapté à la photogrammétrie donne des résultats faux ou des erreurs.**
 
 ## Usage
@@ -22,7 +25,7 @@ Notre script va ensuite dérouler seul toute la chaîne de photogrammétrie.
 
 Avec l'option ``` --with_masks ``` on calcule alors des masques qui vont permettre de filtrer les points n'appartenant pas au sujet. Cela est fait à l'aide d'un modèle développé par [Xuebin Qin](https://xuebinqin.github.io/), [Hang Dai](https://scholar.google.co.uk/citations?user=6yvjpQQAAAAJ&hl=en), [Xiaobin Hu](https://scholar.google.de/citations?user=3lMuodUAAAAJ&hl=en), [Deng-Ping Fan*](https://dengpingfan.github.io/), [Ling Shao](https://scholar.google.com/citations?user=z84rLjoAAAAJ&hl=en), [Luc Van Gool](https://scholar.google.com/citations?user=TwMib_QAAAAJ&hl=en) pour le papier de recherche [Highly Accurate Dichotomous Image Segmentation （ECCV 2022）](https://arxiv.org/pdf/2203.03041.pdf)  
 
-![ship-demo](figures/ship-demo.gif)
+![bckgrnd-demo](figures/gifStatue.gif)
 
 # Installation
 
