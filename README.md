@@ -13,25 +13,30 @@ Notre contribution est ainsi de rendre accessible la photogrammétrie à ceux qu
 
 ## Usage
 
-Dans le répertoire du projet, il suffit d'exécuter:
+Dans le répertoire du projet, il suffit d'exécuter la commande suivante:
 ```
     python pipelineLinux.py [--with_masks] ./ExampleSets/StatueHQ
 ```
 
+Avec le chemin vers votre dossier d'images.
 Notre script va ensuite dérouler seul toute la chaîne de photogrammétrie. 
 
 ## Masquage automatique
 
 
-Avec l'option ``` --with_masks ``` on calcule alors des masques qui vont permettre de filtrer les points n'appartenant pas au sujet. Cela est fait à l'aide d'un modèle développé par [Xuebin Qin](https://xuebinqin.github.io/), [Hang Dai](https://scholar.google.co.uk/citations?user=6yvjpQQAAAAJ&hl=en), [Xiaobin Hu](https://scholar.google.de/citations?user=3lMuodUAAAAJ&hl=en), [Deng-Ping Fan*](https://dengpingfan.github.io/), [Ling Shao](https://scholar.google.com/citations?user=z84rLjoAAAAJ&hl=en), [Luc Van Gool](https://scholar.google.com/citations?user=TwMib_QAAAAJ&hl=en) pour le papier de recherche [Highly Accurate Dichotomous Image Segmentation （ECCV 2022）](https://arxiv.org/pdf/2203.03041.pdf)  
+Avec l'option ``` --with_masks ``` le script génère des masques qui vont permettre de filtrer les points n'appartenant pas au sujet. Cela est fait à l'aide d'un modèle développé par [Xuebin Qin](https://xuebinqin.github.io/), [Hang Dai](https://scholar.google.co.uk/citations?user=6yvjpQQAAAAJ&hl=en), [Xiaobin Hu](https://scholar.google.de/citations?user=3lMuodUAAAAJ&hl=en), [Deng-Ping Fan*](https://dengpingfan.github.io/), [Ling Shao](https://scholar.google.com/citations?user=z84rLjoAAAAJ&hl=en), [Luc Van Gool](https://scholar.google.com/citations?user=TwMib_QAAAAJ&hl=en) pour le papier de recherche [Highly Accurate Dichotomous Image Segmentation （ECCV 2022）](https://arxiv.org/pdf/2203.03041.pdf)  
 
 ![bckgrnd-demo](figures/gifStatue.gif)
 
 # Installation
 
+Simply clone the main repository
+
 ```
     git clone https://github.com/MesmerV/3DReconstruction.git
 ```
+
+Il faut ensuite installer les dépendances 
 
 ## Linux
 
@@ -40,18 +45,19 @@ MicMac fonctionne mieux sous Linux, c'est donc l'OS à préférer pour utiliser 
 
 * Intallation de MicMac : https://micmac.ensg.eu/index.php/Install 
 
-* Environnement Python: si vous utilisez Anaconda:
+* Pour utiliser le masquage automatique, il faut un environnement Python plus spécifique.
+Si vous utilisez Anaconda:
 
 ```
 conda env create -f torch18
 conda activate torch 18
 ```
-sinon référez vous à torch18.yml pour les dépendances
+Sinon référez vous à torch18.yml pour les dépendances
 
 
 ## Windows 
 
-On peut aussi l'utiliser sous Windows
+Le script n'est pas (encore) fonctionnel sous windows mais peut être rendu compatible.
 Sous réserve de l'installation de MicMac
 
 * Intallation de MicMac : https://micmac.ensg.eu/index.php/Install 

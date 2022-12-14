@@ -78,7 +78,7 @@ def MicMacPipeline(args,img):
 
     #Tapas finds the camera positions
     printTitle("Run Tapas - Optimize camera pos")
-    if ExecuteProcess("mm3d",["Tapas","Fraser",matcher,"Out=Projet"]):
+    if ExecuteProcess("mm3d",["Tapas","RadialBasic",matcher,"Out=Projet"]):
         return
 
     # homolFilterPoints
@@ -107,11 +107,11 @@ def main(args):
     im_list = GetImagesList(args.dataset_path)
 
     if len(im_list) == 0:
-        logging.error("ERROR - No images found in "+ args.dataset_path + ' !!!' )
+        print("ERROR - No images found in "+ args.dataset_path + ' !!!' )
         return
 
     args.imgType = im_list[0].split('.')[-1]
-    logging.info("\n Found ",len(im_list), " images of type ",args.imgType,"\n\n" )
+    print("\n Found ",len(im_list), " images of type ",args.imgType,"\n\n" )
     first_im = io.imread(im_list[0])
     
     # Create workspace for MicMac with copies of images

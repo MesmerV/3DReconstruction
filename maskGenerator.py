@@ -13,6 +13,8 @@ import torch.optim as optim
 import torch.nn.functional as F
 from torchvision.transforms.functional import normalize
 
+import requests
+
 sys.path.append("DIS/IS-Net")
 
 from models import *
@@ -76,6 +78,7 @@ if __name__ == "__main__":
 
 
     args = parser.parse_args()
+
 
     CreateMasks(args.dataset_path,args.result_path,thr=0)
     
